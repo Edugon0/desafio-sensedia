@@ -54,6 +54,22 @@ curl http://localhost:8080/headers
 ```
 ![teste headers](assets/request-verificacaoHeaders.png)
 
+## Dificuldades encontradas
+
+### Porta 80 com permissão negada
+Ao tentar subir o container mapeando a porta 80, o sistema retornou erro de permissão por ser uma porta privilegiada no Linux:
+
+![Error de permissão na Porta 80](assets/docker-run-error.png)
+
+**Solução:** utilizei a porta 8080 no lugar da 80, mapeando 
+corretamente com `-p 8080:80`:
+
+```bash
+docker run -d -p 8080:80 kennethreitz/httpbin
+```
+
+A aplicação ficou acessível normalmente em `http://localhost:8080`.
+
 ## Como reproduzir
 
 ### Usando docker run
